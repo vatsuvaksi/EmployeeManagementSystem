@@ -7,6 +7,4 @@ class EmployeeService {
         return axios.get(Employee_Api_Base_Url);
     }
 }
-
-
 export default new EmployeeService();
