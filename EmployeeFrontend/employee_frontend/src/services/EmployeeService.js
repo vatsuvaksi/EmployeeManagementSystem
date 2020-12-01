@@ -9,5 +9,8 @@ class EmployeeService {
     createEmployees(employee){
         return axios.post(Employee_Api_Base_Url , employee);
     }
+    getEmployeesByName(firstName) {
+        return axios.get(Employee_Api_Base_Url,firstName);
+    }
 }
 export default new EmployeeService();

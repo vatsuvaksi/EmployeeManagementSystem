@@ -1,11 +1,14 @@
 package com.backend.employee.Controller;
 
+import com.backend.employee.Exceptions.ResourceNotFoundException;
 import com.backend.employee.Model.employee;
 import com.backend.employee.Repository.EmployeeRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +33,13 @@ public class EmployeeController{
     @PostMapping("/employees")
     public employee createEmployee(@RequestBody employee emp){
         return employeeRepository.save(emp);
+    }
+    //get byy Id 
+    @GetMapping("/employees/{id}")
+    public ResponseEntity<employee> getById(@PathVariable Long id){
+        employee emp = employeeRepository.findById(id)
+        .orElseThrow(() -> new ResourceNotFoundException("emp dosen't exist" + id));
+        return ResponseEntity.ok(emp);
     }
 
 
